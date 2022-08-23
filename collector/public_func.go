@@ -7,27 +7,31 @@ import (
 	"os"
 )
 
+// 存储监控参数的状态 正常true 不正常false   最终此map 返回服务端解析 是否推送告警
+var MonitorisHealth = make(map[string]string)
+
+// 写入yaml 配置文件结构体
 type ConfigStruct struct {
-	Token  string                 `yaml:"token"`
-	Port  map[string]interface{} `yaml:"port"`
-	Proce map[string]interface{} `yaml:"Proce"`
+	Token string            `yaml:"token"`
+	Port  map[string]string `yaml:"port"`
+	Proce map[string]string `yaml:"Proce"`
 }
 
+// 解析json 类型结构体
 type ParseValue struct {
-	Token string                 `json:"token"`
-	Port  map[string]interface{} `json:"port"`
-	Proce map[string]interface{} `json:"proce"`
+	Token string            `json:"token"`
+	Port  map[string]string `json:"port"`
+	Proce map[string]string `json:"proce"`
 }
 
+// 接收服务端传入的参数 解析后写入yaml 配置文件
 func ParseParam(parse ParseValue) {
-	//var configViperConfig = viper.New()
-	//configViperConfig.SetConfigName("node_exporter")
-	//configViperConfig.SetConfigType("yaml")
 	ParamWrite(parse.Token, parse.Port, parse.Proce)
 
 }
 
-func ParamWrite(token string, port, proces map[string]interface{}) {
+// 将解析到的参数写入到yaml 配置文件
+func ParamWrite(token string, port, proces map[string]string) {
 	str := &ConfigStruct{
 		Token: token,
 		Port:  port,

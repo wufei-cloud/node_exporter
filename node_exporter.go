@@ -170,6 +170,8 @@ func main() {
 		).Default("").String()
 	)
 
+	collector.ProcesCheck()
+	collector.PortCheck()
 	promlogConfig := &promlog.Config{}
 	flag.AddFlags(kingpin.CommandLine, promlogConfig)
 	kingpin.Version(version.Print("node_exporter"))
@@ -198,8 +200,10 @@ func main() {
 			</html>`))
 	})
 	http.HandleFunc("/query", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method == "POST" && r.ParseForm() == nil {
+		if r.Method == "POST" && r.ParseForm() == nil && r.Header.Get("Node_Token") == collector.ReadParam().Get("token"){
 			body, err := ioutil.ReadAll(r.Body)
+
+			fmt.Println()
 			if err != nil {
 				level.Error(logger).Log(err.Error())
 			}
