@@ -14,7 +14,9 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	stdlog "log"
 	"net/http"
 	_ "net/http/pprof"
@@ -194,6 +196,21 @@ func main() {
 			<p><a href="` + *metricsPath + `">Metrics</a></p>
 			</body>
 			</html>`))
+	})
+	http.HandleFunc("/query", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == "POST" && r.ParseForm() == nil {
+			body, err := ioutil.ReadAll(r.Body)
+			if err != nil {
+				level.Error(logger).Log(err.Error())
+			}
+			var data collector.ParseValue
+			json.Unmarshal([]byte(body), &data)
+			collector.ParseParam(data)
+			w.Write([]byte("请求成功"))
+			return
+		}
+		w.Write([]byte("请求错误"))
+		return
 	})
 
 	level.Info(logger).Log("msg", "Listening on", "address", *listenAddress)
