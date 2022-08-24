@@ -23,9 +23,11 @@ require (
 	github.com/prometheus/exporter-toolkit v0.7.1
 	github.com/prometheus/procfs v0.8.0
 	github.com/safchain/ethtool v0.1.0
+	github.com/sirupsen/logrus v1.9.0
 	github.com/soundcloud/go-runit v0.0.0-20150630195641-06ad41a06c4a
 	golang.org/x/sys v0.0.0-20220818161305-2296e01440c6
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
+	gopkg.in/yaml.v2 v2.4.0
 )
 
 require (
@@ -50,7 +52,6 @@ require (
 	github.com/pelletier/go-toml/v2 v2.0.3 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/siebenmann/go-kstat v0.0.0-20210513183136-173c9b0a9973 // indirect
-	github.com/sirupsen/logrus v1.9.0 // indirect
 	github.com/spf13/afero v1.9.2 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
@@ -67,6 +68,5 @@ require (
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
-	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

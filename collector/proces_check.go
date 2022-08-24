@@ -3,10 +3,9 @@ package collector
 import (
 	"bytes"
 	"fmt"
-	"github.com/spf13/viper"
 	log "github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 	"os/exec"
-	"time"
 )
 
 // 从yaml配置文件读取配置
@@ -16,7 +15,7 @@ func ReadParam() *viper.Viper {
 	configViperConfig.SetConfigName("node_exporter")
 	configViperConfig.SetConfigType("yaml")
 	if err := configViperConfig.ReadInConfig(); err != nil {
-		fmt.Println(err)
+		log.Errorln(err.Error())
 	}
 	return configViperConfig
 }
@@ -30,11 +29,10 @@ func ProcesCheck() {
 		cmd.Stdout = &out
 		err := cmd.Run()
 		if err != nil {
-			log.Error(k + "proce  down",err.Error())
+			log.Errorln(k+" proce down ", err.Error())
 			MonitorisHealth[k] = "false" // 存在监控异常的服务存入MonitorisHealth map中 存储
 			continue
 		}
 		MonitorisHealth[k] = "true" // 监控正常的服务存入MonitorisHealth map中 存储
 	}
-	time.AfterFunc(2*time.Second, ProcesCheck)
 }

@@ -1,10 +1,11 @@
 package collector
 
 import (
-	"fmt"
+	log "github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"os"
+	"time"
 )
 
 // 存储监控参数的状态 正常true 不正常false   最终此map 返回服务端解析 是否推送告警
@@ -39,7 +40,7 @@ func ParamWrite(token string, port, proces map[string]string) {
 	}
 	data, err := yaml.Marshal(str)
 	if err != nil {
-		fmt.Println(err)
+		log.Errorln(err.Error())
 	}
 	err = ioutil.WriteFile("node_exporter.yaml", data, 0777)
 }
@@ -60,12 +61,19 @@ func IsExist() bool {
 func CreateFile() bool {
 	file, err := os.Create("./node_exporter.yaml")
 	if err != nil {
-		fmt.Println(err)
+		log.Errorln(err.Error())
 	}
-	fmt.Println(file)
 	file.Close()
 	if IsExist() == true {
 		return true
 	}
 	return false
+}
+
+// 所有自定义监控调用入口
+func AllMonitor() {
+	ProcesCheck()
+	PortCheck()
+
+	time.AfterFunc(2*time.Second, AllMonitor)
 }
