@@ -1,15 +1,19 @@
 package collector
 
 import (
+	"bytes"
+	"encoding/json"
+	"fmt"
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
+	"net/http"
 	"os"
 	"time"
 )
 
 // 存储监控参数的状态 正常true 不正常false   最终此map 返回服务端解析 是否推送告警
-var MonitorisHealth = make(map[string]string)
+var MonitorisHealth = make(map[string]bool)
 
 // 写入yaml 配置文件结构体
 type ConfigStruct struct {
@@ -75,5 +79,27 @@ func AllMonitor() {
 	ProcesCheck()
 	PortCheck()
 
+	fmt.Println(MonitorisHealth)
+
+	client := &http.Client{}
+	str, _ := json.Marshal(&MonitorisHealth)
+	defer func() {
+		if err := recover(); err != nil {
+			log.Errorln(err)
+		}
+	}()
 	time.AfterFunc(2*time.Second, AllMonitor)
+	//request, err := http.NewRequest("POST", "http://127.0.0.1:8081/query/node_exporter", bytes.NewReader(str))
+	request, err := http.NewRequest("POST", "http://127.0.0.1:8081/query/node_exporter", bytes.NewReader([]byte(str)))
+	fmt.Println(request)
+	request.Header.Add("Node_Token", ReadParam().GetString("token"))
+	request.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	//request.Header.Add("Content-Type", "application/json;charset=UTF-8")
+	MonitorisHealth = make(map[string]bool)
+	if err != nil {
+		log.Errorln(err.Error())
+	}
+	response, _ := client.Do(request)
+	response.Body.Close()
+
 }

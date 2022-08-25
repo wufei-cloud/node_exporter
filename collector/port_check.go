@@ -16,9 +16,9 @@ func PortCheck() {
 		err := cmd.Run()
 		if err != nil {
 			log.Error(k+" port down ", err.Error())
-			MonitorisHealth[k] = "false" // 存在监控异常的服务存入MonitorisHealth map中 存储
-			continue
+			MonitorisHealth[k] = false // 存在监控异常的服务存入MonitorisHealth map中 存储
+		} else {
+			MonitorisHealth[k] = true // 监控正常的服务存入MonitorisHealth map中 存储
 		}
-		MonitorisHealth[k] = "true" // 监控正常的服务存入MonitorisHealth map中 存储
 	}
 }

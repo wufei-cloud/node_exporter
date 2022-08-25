@@ -22,7 +22,6 @@ func ReadParam() *viper.Viper {
 
 // 从配置文件获取进程信息  监控进程是否存在
 func ProcesCheck() {
-	MonitorisHealth := make(map[string]string)
 	for k, v := range ReadParam().GetStringMap("Proce") {
 		cmd := exec.Command("/bin/bash", "-c", "ps -ef | grep "+fmt.Sprintf("%v", v)+" | grep -v grep")
 		var out bytes.Buffer
@@ -30,9 +29,9 @@ func ProcesCheck() {
 		err := cmd.Run()
 		if err != nil {
 			log.Errorln(k+" proce down ", err.Error())
-			MonitorisHealth[k] = "false" // 存在监控异常的服务存入MonitorisHealth map中 存储
-			continue
+			MonitorisHealth[k] = false // 存在监控异常的服务存入MonitorisHealth map中 存储
+		} else {
+			MonitorisHealth[k] = true // 监控正常的服务存入MonitorisHealth map中 存储
 		}
-		MonitorisHealth[k] = "true" // 监控正常的服务存入MonitorisHealth map中 存储
 	}
 }
