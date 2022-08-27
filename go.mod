@@ -22,7 +22,7 @@ require (
 	github.com/prometheus/common v0.35.0
 	github.com/prometheus/exporter-toolkit v0.7.1
 	github.com/prometheus/procfs v0.8.0
-	github.com/safchain/ethtool v0.1.0
+	github.com/safchain/ethtool v0.2.0
 	github.com/sirupsen/logrus v1.9.0
 	github.com/soundcloud/go-runit v0.0.0-20150630195641-06ad41a06c4a
 	github.com/spf13/viper v1.12.0
