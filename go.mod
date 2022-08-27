@@ -22,9 +22,10 @@ require (
 	github.com/prometheus/common v0.35.0
 	github.com/prometheus/exporter-toolkit v0.7.1
 	github.com/prometheus/procfs v0.8.0
-	github.com/safchain/ethtool v0.1.0
+	github.com/safchain/ethtool v0.2.0
 	github.com/sirupsen/logrus v1.9.0
 	github.com/soundcloud/go-runit v0.0.0-20150630195641-06ad41a06c4a
+	github.com/spf13/viper v1.12.0
 	golang.org/x/sys v0.0.0-20220818161305-2296e01440c6
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/yaml.v2 v2.4.0
@@ -56,7 +57,6 @@ require (
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/spf13/viper v1.12.0 // indirect
 	github.com/subosito/gotenv v1.4.0 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
