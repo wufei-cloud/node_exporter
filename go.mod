@@ -16,7 +16,7 @@ require (
 	github.com/mattn/go-xmlrpc v0.0.3
 	github.com/mdlayher/netlink v1.6.0
 	github.com/mdlayher/wifi v0.0.0-20220320220353-954ff73a19a5
-	github.com/opencontainers/selinux v1.10.1
+	github.com/opencontainers/selinux v1.11.0
 	github.com/prometheus/client_golang v1.12.2
 	github.com/prometheus/client_model v0.2.0
 	github.com/prometheus/common v0.35.0
@@ -25,6 +25,7 @@ require (
 	github.com/safchain/ethtool v0.1.0
 	github.com/sirupsen/logrus v1.9.0
 	github.com/soundcloud/go-runit v0.0.0-20150630195641-06ad41a06c4a
+	github.com/spf13/viper v1.12.0
 	golang.org/x/sys v0.0.0-20220818161305-2296e01440c6
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/yaml.v2 v2.4.0
@@ -56,7 +57,6 @@ require (
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/spf13/viper v1.12.0 // indirect
 	github.com/subosito/gotenv v1.4.0 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
